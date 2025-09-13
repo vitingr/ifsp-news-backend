@@ -1,19 +1,24 @@
 model Article {
+  id           String         @id @default(uuid())
+  slug         String         @unique
+  title        String
+  description  String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  authorId     String
+  author       User           @relation(fields: [authorId], references: [id])
+  likedArticle LikedArticle[]
+
+  @@map("articles")
+}
+
+model Category {
   id          String   @id @default(uuid())
+  slug        String   @unique
   title       String
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  @@map("articles")
-  LikedArticle LikedArticle[]
-}
-
-model Category {
-  id          String @id @default(uuid())
-  slug        String
-  title       String
-  description String
 
   @@map("categories")
 }

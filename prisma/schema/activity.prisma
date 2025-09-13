@@ -1,10 +1,9 @@
 model LikedArticle {
-  id        String @id @default(uuid())
+  id        String  @id @default(uuid())
   userId    String
   articleId String
-
-  user    User    @relation(fields: [userId], references: [id])
-  article Article @relation(fields: [articleId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
+  article   Article @relation(fields: [articleId], references: [id])
 
   @@map("liked_articles")
 }
