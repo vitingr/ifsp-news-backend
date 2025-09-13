@@ -6,6 +6,11 @@ import fastifyJwt from '@fastify/jwt'
 
 import { env } from './shared/config/env'
 
+import { articlesRoutes } from './modules/content/http/articles/routes'
+import { categoriesRoutes } from './modules/content/http/categories/routes'
+import { authRoutes } from './modules/account/http/auth/routes'
+import { usersRoutes } from './modules/account/http/users/routes'
+
 export const app = fastify({
   logger: {
     enabled: env.DEBUG === 'true'
@@ -41,6 +46,11 @@ app.register(fastifyJwt, {
 app.register(fastifyCookie, {
   secret: env.JWT_SECRET
 })
+
+app.register(authRoutes)
+app.register(articlesRoutes)
+app.register(categoriesRoutes)
+app.register(usersRoutes)
 
 app.get('/', (_, reply) => {
   return reply.send({

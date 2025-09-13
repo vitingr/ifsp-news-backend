@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { getUserByEmailFactory } from '@/modules/account/use-cases/users/get-user-by-email/factory'
 
 import { getUserByEmailParamsSchema } from './schemas'
-import { BaseController } from '@/shared/infra/http/controllers/base-controler'
+import { BaseController } from '@/shared/infra/http/controllers/base-controller'
 
 export class GetUserByEmailController extends BaseController {
   private useCase = getUserByEmailFactory()

@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { createUserBodySchema } from './schemas'
-import { BaseController } from '@/shared/infra/http/controllers/base-controler'
 import { createUserFactory } from '@/modules/account/use-cases/users/create-user/factory'
+import { BaseController } from '@/shared/infra/http/controllers/base-controller'
 
 export class CreateUserController extends BaseController {
   private useCase = createUserFactory()

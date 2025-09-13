@@ -9,14 +9,9 @@ import { updateUserController } from '@/modules/account/http/users/update-user'
 
 export const usersRoutes = async (app: FastifyInstance) => {
   getUsersController.register(app)
-
   getUserByIdController.register(app)
-
   getUserByEmailController.register(app)
-
   createUserController.register(app)
-
   updateUserController.register(app)
-
   deleteUserController.register(app)
 }

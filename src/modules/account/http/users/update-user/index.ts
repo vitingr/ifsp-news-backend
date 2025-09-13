@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { updateUserFactory } from '@/modules/account/use-cases/users/update-user/factory'
 import { updateUserBodySchema, updateUserParamsSchema } from './schemas'
-import { BaseController } from '@/shared/infra/http/controllers/base-controler'
+import { BaseController } from '@/shared/infra/http/controllers/base-controller'
 
 export class UpdateUserController extends BaseController {
   private useCase = updateUserFactory()

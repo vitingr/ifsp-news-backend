@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { deleteUserFactory } from '@/modules/account/use-cases/users/delete-user/factory'
 
 import { deleteUserParamsSchema } from './schemas'
-import { BaseController } from '@/shared/infra/http/controllers/base-controler'
+import { BaseController } from '@/shared/infra/http/controllers/base-controller'
 
 export class DeleteUserController extends BaseController {
   private useCase = deleteUserFactory()

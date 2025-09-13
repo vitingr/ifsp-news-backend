@@ -2,10 +2,10 @@ import { OAuth2Client } from 'google-auth-library'
 import { env } from '@/shared/config/env'
 import { InvalidSocialAccountError } from '@/shared/infra/http/exceptions/auth'
 import { UserDoesNotExistError } from '@/shared/infra/http/exceptions/user'
-import { BaseAuthUseCase } from '../base/base-auth'
 import { UsersRepository } from '@/modules/account/repositories/interfaces/users-repository'
-import { AuthRepository } from '@/modules/account/repositories/interfaces/auth-repository'
 import { SocialLoginUseCasePayload, SocialLoginUseCaseReturn } from './types'
+import { AuthRepository } from '@/modules/account/repositories/interfaces/auth-interface'
+import { BaseAuthUseCase } from '../base-auth'
 
 export class SocialLoginUseCase extends BaseAuthUseCase {
   private googleClient: OAuth2Client
