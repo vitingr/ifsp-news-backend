@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-ifsp-news-db
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=database
+    volumes:
+      - postgres-ifsp-news-data:/var/lib/postgresql/data
+    networks:
+      - database
+
+volumes:
+  postgres-ifsp-news-data:
+
+networks:
+  database:
+    driver: bridge

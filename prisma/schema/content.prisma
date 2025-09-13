@@ -1,0 +1,19 @@
+model Article {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("articles")
+  LikedArticle LikedArticle[]
+}
+
+model Category {
+  id          String @id @default(uuid())
+  slug        String
+  title       String
+  description String
+
+  @@map("categories")
+}
