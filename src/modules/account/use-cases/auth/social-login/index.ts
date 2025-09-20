@@ -44,7 +44,7 @@ export class SocialLoginUseCase extends BaseAuthUseCase {
   execute = async (
     payload: SocialLoginUseCasePayload
   ): Promise<SocialLoginUseCaseReturn> => {
-    const { email, socialType, socialToken } = payload
+    const { email, socialType, socialToken } = payload     
 
     const user = await this.getOrCreateUser(email)
 

@@ -12,9 +12,8 @@ model User {
 
   role         UserRoleEnum?
   profile      Profile?
-  authCode     AuthCode[]
   likedArticle LikedArticle[]
-  article      Article[]
+  articles     Article[]
 
   @@map("users")
 }
@@ -29,16 +28,4 @@ model Profile {
   user      User     @relation(fields: [userId], references: [id])
 
   @@map("profiles")
-}
-
-model AuthCode {
-  id        String   @id @default(uuid())
-  userId    String
-  code      String
-  expiresAt DateTime
-  isUsed    Boolean  @default(false)
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-
-  @@map("auth_codes")
 }

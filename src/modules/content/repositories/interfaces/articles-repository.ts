@@ -1,4 +1,4 @@
-import { Article, Prisma } from "@prisma/client";
+import { Article, Prisma } from '@prisma/client'
 
 export type GetArticlesReturn = Prisma.ArticleGetPayload<{
   include: {
@@ -7,7 +7,9 @@ export type GetArticlesReturn = Prisma.ArticleGetPayload<{
 }>
 
 export interface ArticlesRepository {
-  createArticle: (payload: Prisma.ArticleUncheckedCreateInput) => Promise<Article>
+  createArticle: (
+    payload: Prisma.ArticleUncheckedCreateInput & { categories: string[] }
+  ) => Promise<Article>
   deleteArticle: (id: string) => Promise<null>
   getArticleById: (id: string) => Promise<Article | null>
   getAllArticles: () => Promise<Article[] | null>

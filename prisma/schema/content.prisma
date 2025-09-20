@@ -1,24 +1,40 @@
 model Article {
-  id           String         @id @default(uuid())
-  slug         String         @unique
-  title        String
-  description  String?
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  authorId     String
-  author       User           @relation(fields: [authorId], references: [id])
-  likedArticle LikedArticle[]
+  id              String            @id @default(uuid())
+  slug            String            @unique
+  title           String
+  content         String
+  thumb           String            @default("https://images.ctfassets.net/kftzwdyauwt9/35hDFegmXaio5QTQcX908E/326ac0d57b3e0be6d9e5643e321fbe28/oai_GA_Stories_1.1.png?w=1920&q=90&fm=webp")
+  description     String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  authorId        String
+  author          User              @relation(fields: [authorId], references: [id])
+  likedArticle    LikedArticle[]
+  articleCategory ArticleCategory[]
 
   @@map("articles")
 }
 
 model Category {
-  id          String   @id @default(uuid())
-  slug        String   @unique
-  title       String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String            @id @default(uuid())
+  slug            String            @unique
+  title           String
+  description     String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  articleCategory ArticleCategory[]
 
   @@map("categories")
+}
+
+model ArticleCategory {
+  id         String   @id @default(uuid())
+  articleId  String
+  categoryId String
+  article    Article  @relation(fields: [articleId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@unique([articleId, categoryId])
+  @@map("article_categories")
 }
