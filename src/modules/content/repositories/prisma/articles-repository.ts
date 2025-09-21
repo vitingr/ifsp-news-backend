@@ -85,4 +85,17 @@ export class PrismaArticlesRepository implements ArticlesRepository {
       }
     })
   }
+
+  updateArticle = async (
+    payload: Omit<Prisma.ArticleUncheckedCreateInput, 'authorId'> & {
+      categories: string[]
+    }
+  ) => {
+    return await prisma.article.update({
+      where: {
+        id: payload.id
+      },
+      data: payload
+    })
+  }
 }

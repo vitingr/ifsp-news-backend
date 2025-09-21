@@ -8,4 +8,7 @@ export interface CategoriesRepository {
   getCategoryById: (id: string) => Promise<Category | null>
   getAllCategories: () => Promise<Category[] | null>
   getCategoryBySlug: (slug: string) => Promise<Category | null>
+  updateCategory: (
+    payload: Prisma.CategoryUncheckedCreateInput
+  ) => Promise<Category>
 }

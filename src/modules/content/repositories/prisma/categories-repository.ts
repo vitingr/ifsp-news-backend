@@ -44,4 +44,13 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
   getAllCategories = async () => {
     return await prisma.category.findMany()
   }
+
+  updateCategory = async (payload: Prisma.CategoryUncheckedCreateInput) => {
+    return await prisma.category.update({
+      where: {
+        id: payload.id
+      },
+      data: payload
+    })
+  }
 }

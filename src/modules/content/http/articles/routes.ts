@@ -4,6 +4,7 @@ import { getArticleBySlugController } from "./get-article-by-slug";
 import { getAllArticlesController } from "./get-all-articles";
 import { createArticleController } from "./create-article";
 import { deleteArticleController } from "./delete-article";
+import { updateArticleController } from "./update-article";
 
 export const articlesRoutes = async (app: FastifyInstance) => {
   createArticleController.register(app)
@@ -11,4 +12,5 @@ export const articlesRoutes = async (app: FastifyInstance) => {
   getAllArticlesController.register(app)
   getArticleByIdController.register(app)
   getArticleBySlugController.register(app)
+  updateArticleController.register(app)
 }

@@ -9,7 +9,8 @@ export class GetArticleBySlugController extends BaseController {
   constructor() {
     super({
       method: 'get',
-      path: '/articles/slug/:slug'
+      path: '/articles/slug/:slug',
+      isPublicRoute: true
     })
   }
 
@@ -17,9 +18,9 @@ export class GetArticleBySlugController extends BaseController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<void> {
-    const { articleSlug } = getArticleBySlugSchema.parse(request.params)
+    const { slug } = getArticleBySlugSchema.parse(request.params)
 
-    const result = await this.useCase.execute(articleSlug)
+    const result = await this.useCase.execute(slug)
 
     reply.status(200).send(result)
   }

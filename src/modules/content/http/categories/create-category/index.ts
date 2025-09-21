@@ -17,12 +17,7 @@ export class CreateCategoryController extends BaseController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<void> {
-    console.log(request.body)
-
     const payload = createCategorySchema.parse(request.body)
-
-    console.log(request.user.sub)
-    console.log(payload)
 
     const result = await this.useCase.execute(payload)
 

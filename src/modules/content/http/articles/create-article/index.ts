@@ -16,9 +16,6 @@ export class CreateArticleController extends BaseController {
   protected async execute(request: FastifyRequest, reply: FastifyReply) {
     const payload = createArticleSchema.parse(request.body)
 
-    console.log(request.user.sub)
-    console.log(payload)
-
     const result = await this.useCase.execute({
       ...payload,
       authorId: request.user.sub
