@@ -4,18 +4,18 @@ import { InvalidSocialAccountError } from '@/shared/infra/http/exceptions/auth'
 import { UserDoesNotExistError } from '@/shared/infra/http/exceptions/user'
 import { UsersRepository } from '@/modules/account/repositories/interfaces/users-repository'
 import { SocialLoginUseCasePayload, SocialLoginUseCaseReturn } from './types'
-import { AuthRepository } from '@/modules/account/repositories/interfaces/auth-interface'
-import { BaseAuthUseCase } from '../base-auth'
+import { createUserFactory } from '../../users/create-user/factory'
 
-export class SocialLoginUseCase extends BaseAuthUseCase {
+const createUserUseCase = createUserFactory()
+
+export class SocialLoginUseCase {
   private googleClient: OAuth2Client
 
-  constructor(
-    usersRepository: UsersRepository,
-    authCodesRepository: AuthRepository
-  ) {
-    super(usersRepository, authCodesRepository)
+  protected readonly usersRepository: UsersRepository
+
+  constructor(usersRepository: UsersRepository) {
     this.googleClient = new OAuth2Client(env.GOOGLE_CLIENT_ID)
+    this.usersRepository = usersRepository
   }
 
   validateGoogleAccount = async (socialToken: string) => {
@@ -41,14 +41,32 @@ export class SocialLoginUseCase extends BaseAuthUseCase {
     }
   }
 
+  protected async getOrCreateUser(email: string) {
+    let user = await this.usersRepository.getUserByEmail(email)
+
+    if (!user) {
+      const { user: newUser } = await createUserUseCase.execute({ email })
+
+      console.log(JSON.stringify(user))
+
+      user = {
+        ...newUser
+      }
+    }
+
+    console.log(JSON.stringify(user))
+
+    if (user) return user
+  }
+
   execute = async (
     payload: SocialLoginUseCasePayload
   ): Promise<SocialLoginUseCaseReturn> => {
-    const { email, socialType, socialToken } = payload     
+    const { email, socialType, socialToken } = payload
 
     const user = await this.getOrCreateUser(email)
 
-    if (!user?.id ) {
+    if (!user?.id) {
       throw new UserDoesNotExistError()
     }
 

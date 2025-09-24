@@ -16,9 +16,6 @@ export class PrismaUsersRepository
       data: {
         id,
         ...payload
-      },
-      include: {
-        profile: true
       }
     })
   }
@@ -33,9 +30,6 @@ export class PrismaUsersRepository
       },
       data: {
         ...payload
-      },
-      include: {
-        profile: true
       }
     })
   }
@@ -44,9 +38,6 @@ export class PrismaUsersRepository
     return await prisma.user.findUnique({
       where: {
         id
-      },
-      include: {
-        profile: true
       }
     })
   }
@@ -55,20 +46,13 @@ export class PrismaUsersRepository
     return await prisma.user.findUnique({
       where: {
         email
-      },
-      include: {
-        profile: true
       }
     })
   }
 
   getUsers = async () => {
 
-    const users = await prisma.user.findMany({
-      include: {
-        profile: true
-      }
-    })
+    const users = await prisma.user.findMany()
 
     return users
   }

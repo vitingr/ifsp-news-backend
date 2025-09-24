@@ -6,13 +6,15 @@ export class PrismaArticlesRepository implements ArticlesRepository {
   createArticle = async (
     payload: Prisma.ArticleUncheckedCreateInput & { categories: string[] }
   ) => {
+    const { categories, ...articleData } = payload
+
     const article = await prisma.article.create({
       data: {
-        ...payload,
+        ...articleData,
         articleCategory:
-          payload?.categories && payload?.categories?.length > 0
+          categories && categories.length > 0
             ? {
-                create: payload.categories.map(catId => ({
+                create: categories.map(catId => ({
                   category: { connect: { id: catId } }
                 }))
               }

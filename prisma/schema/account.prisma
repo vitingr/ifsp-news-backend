@@ -18,3 +18,13 @@ model User {
 
   @@map("users")
 }
+
+model Invite {
+  id        String       @id @default(uuid())
+  email     String
+  token     String       @unique
+  role      UserRoleEnum @default(admin)
+  createdAt DateTime     @default(now())
+  expiresAt DateTime
+  used      Boolean      @default(false)
+}
