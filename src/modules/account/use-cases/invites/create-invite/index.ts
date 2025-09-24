@@ -1,15 +1,15 @@
 import { InvitesRepository } from '@/modules/account/repositories/interfaces/invites-interface'
-import { CreateInviteUseCasePayload, CreateInviteUseCaseReturn } from './types'
+import { CreateInviteUseCaseReturn } from './types'
+import { UserRoleEnum } from '@prisma/client'
 
 export class CreateInviteUseCase {
-  constructor(private invitesRepositority: InvitesRepository) {}
+  constructor(private invitesRepository: InvitesRepository) {}
 
   execute = async (
-    payload: CreateInviteUseCasePayload
+    email: string,
+    role: UserRoleEnum
   ): Promise<CreateInviteUseCaseReturn> => {
-    // checar aqui futuramente se o invite já foi aceito
-
-    const invite = await this.invitesRepositority.createInvite(payload)
+    const invite = await this.invitesRepository.createInvite(email, role)
 
     return {
       invite

@@ -1,6 +1,8 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, UserRoleEnum } from '@prisma/client'
 
-export interface CreateInviteUseCasePayload
-  extends Prisma.InviteUncheckedCreateInput {}
+export interface CreateInviteUseCasePayload {
+  email: string
+  role: UserRoleEnum
+}
 
 export interface CreateInviteUseCaseReturn {}

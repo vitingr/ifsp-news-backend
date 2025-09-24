@@ -1,6 +1,7 @@
-import { Invite, Prisma } from "@prisma/client";
+import { Invite, Prisma, UserRoleEnum } from '@prisma/client'
 
 export interface InvitesRepository {
-  createInvite: (payload: Prisma.InviteUncheckedCreateInput) => Promise<Invite>
+  createInvite: (email: string, role: UserRoleEnum) => Promise<Invite>
   acceptInvite: (token: string) => Promise<Invite | void>
+  getInviteByToken: (token: string) => Promise<Invite | null>
 }

@@ -10,6 +10,7 @@ import { articlesRoutes } from './modules/content/http/articles/routes'
 import { categoriesRoutes } from './modules/content/http/categories/routes'
 import { authRoutes } from './modules/account/http/auth/routes'
 import { usersRoutes } from './modules/account/http/users/routes'
+import { invitesRoutes } from './modules/account/http/invites/routes'
 
 export const app = fastify({
   logger: {
@@ -51,6 +52,7 @@ app.register(authRoutes)
 app.register(articlesRoutes)
 app.register(categoriesRoutes)
 app.register(usersRoutes)
+app.register(invitesRoutes)
 
 app.get('/', (_, reply) => {
   return reply.send({

@@ -11,3 +11,9 @@ export class InviteDoesNotExistError extends ControllerError {
     super('Invite does not exist.')
   }
 }
+
+export class InviteExpiredExistError extends ControllerError {
+  constructor(public status = 401) {
+    super('Invite is expired.')
+  }
+}

@@ -5,13 +5,12 @@ enum UserRoleEnum {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  avatarUrl String?  @default("https://plus.unsplash.com/premium_photo-1672201106204-58e9af7a2888?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3JhZGllbnQlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id           String         @id @default(uuid())
+  email        String         @unique
+  name         String?
+  avatarUrl    String?        @default("https://plus.unsplash.com/premium_photo-1672201106204-58e9af7a2888?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3JhZGllbnQlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
   role         UserRoleEnum?  @default(student)
   likedArticle LikedArticle[]
   articles     Article[]

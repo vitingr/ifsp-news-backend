@@ -15,9 +15,11 @@ export class AcceptInviteController extends BaseController {
   }
 
   protected async execute(request: FastifyRequest, reply: FastifyReply) {
-    const { token } = acceptInviteSchema.parse(request.params)
+    const { token } = acceptInviteSchema.parse(request.body)
 
     const result = await this.useCase.execute(token)
+
+    return reply.status(200).send(result)
   }
 }
 
