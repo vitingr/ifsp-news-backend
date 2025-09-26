@@ -1,7 +1,7 @@
 enum UserRoleEnum {
   student
+  author
   admin
-  super_admin
 }
 
 model User {
@@ -22,7 +22,7 @@ model Invite {
   id        String       @id @default(uuid())
   email     String
   token     String       @unique
-  role      UserRoleEnum @default(admin)
+  role      UserRoleEnum @default(author)
   createdAt DateTime     @default(now())
   expiresAt DateTime
   used      Boolean      @default(false)
