@@ -5,6 +5,9 @@ export interface SocialLoginUseCasePayload {
   email: string
   socialToken: string
   socialType: (typeof SUPPORTED_SOCIAL_AUTH_TYPES)[number]
+  avatarUrl: string
+  role: string
+  name: string
 }
 
 export interface SocialLoginUseCaseReturn {

@@ -5,6 +5,21 @@ import { generateRandomNumber } from '@/shared/types/utilities/generate-random-n
 
 export class PrismaInvitesRepository implements InvitesRepository {
   acceptInvite = async (token: string) => {
+    const invite = await this.getInviteByToken(token)
+
+    if (!invite) {
+      return
+    }
+
+    await prisma.user.update({
+      where: {
+        email: invite.email
+      },
+      data: {
+        role: 'author'
+      }
+    })
+
     return await prisma.invite.update({
       where: {
         token

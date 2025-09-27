@@ -5,6 +5,7 @@ import { UserDoesNotExistError } from '@/shared/infra/http/exceptions/user'
 import { UsersRepository } from '@/modules/account/repositories/interfaces/users-repository'
 import { SocialLoginUseCasePayload, SocialLoginUseCaseReturn } from './types'
 import { createUserFactory } from '../../users/create-user/factory'
+import { UserRoleEnum } from '@prisma/client'
 
 const createUserUseCase = createUserFactory()
 
@@ -41,11 +42,21 @@ export class SocialLoginUseCase {
     }
   }
 
-  protected async getOrCreateUser(email: string) {
+  protected async getOrCreateUser(
+    email: string,
+    name: string,
+    role: string,
+    avatarUrl: string
+  ) {
     let user = await this.usersRepository.getUserByEmail(email)
 
     if (!user) {
-      const { user: newUser } = await createUserUseCase.execute({ email })
+      const { user: newUser } = await createUserUseCase.execute({
+        email,
+        avatarUrl,
+        role: role as UserRoleEnum,
+        name
+      })
 
       console.log(JSON.stringify(user))
 
@@ -62,9 +73,9 @@ export class SocialLoginUseCase {
   execute = async (
     payload: SocialLoginUseCasePayload
   ): Promise<SocialLoginUseCaseReturn> => {
-    const { email, socialType, socialToken } = payload
+    const { email, socialType, socialToken, avatarUrl, name, role } = payload
 
-    const user = await this.getOrCreateUser(email)
+    const user = await this.getOrCreateUser(email, name, role, avatarUrl)
 
     if (!user?.id) {
       throw new UserDoesNotExistError()

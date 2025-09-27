@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
@@ -30,6 +31,6 @@
     "src/**/*.d.ts",
     "tests/**/*.ts",
     "prisma/**/*.ts"
-  ],
+, "src/services/templates/invite/index.tsx", "src/services/templates/invite/render.tsx"  ],
   "exclude": ["node_modules", "dist", ".*"]
 }

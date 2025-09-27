@@ -26,4 +26,6 @@ model Invite {
   createdAt DateTime     @default(now())
   expiresAt DateTime
   used      Boolean      @default(false)
+
+  @@map("invites")
 }

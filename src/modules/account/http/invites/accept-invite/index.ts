@@ -9,8 +9,7 @@ export class AcceptInviteController extends BaseController {
   constructor() {
     super({
       method: 'post',
-      path: '/accept-invite',
-      isPublicRoute: true
+      path: '/invites/accept-invite'
     })
   }
 
