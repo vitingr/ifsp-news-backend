@@ -1,4 +1,4 @@
-import { Invite, Prisma, UserRoleEnum } from '@prisma/client'
+import { UserRoleEnum } from '@prisma/client'
 import { InvitesRepository } from '../interfaces/invites-interface'
 import { prisma } from '@/shared/infra/database/prisma/client'
 import { generateRandomNumber } from '@/shared/types/utilities/generate-random-number'

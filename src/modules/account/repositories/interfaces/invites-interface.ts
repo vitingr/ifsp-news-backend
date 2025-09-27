@@ -1,4 +1,4 @@
-import { Invite, Prisma, UserRoleEnum } from '@prisma/client'
+import { Invite, UserRoleEnum } from '@prisma/client'
 
 export interface InvitesRepository {
   createInvite: (email: string, role: UserRoleEnum) => Promise<Invite>
