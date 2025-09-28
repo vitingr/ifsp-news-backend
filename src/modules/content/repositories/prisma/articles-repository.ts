@@ -91,13 +91,27 @@ export class PrismaArticlesRepository implements ArticlesRepository {
   updateArticle = async (
     payload: Omit<Prisma.ArticleUncheckedCreateInput, 'authorId'> & {
       categories: string[]
-    }
+    },
+    id: string
   ) => {
-    return await prisma.article.update({
-      where: {
-        id: payload.id
-      },
-      data: payload
+    const { categories, ...articleData } = payload
+
+    const article = await prisma.article.update({
+      where: { id },
+      data: articleData
     })
+
+    if (categories) {
+      await prisma.articleCategory.deleteMany({ where: { articleId: id } })
+
+      await prisma.articleCategory.createMany({
+        data: categories.map(categoryId => ({
+          articleId: id,
+          categoryId
+        }))
+      })
+    }
+
+    return article
   }
 }

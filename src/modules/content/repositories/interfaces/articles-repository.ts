@@ -15,6 +15,9 @@ export interface ArticlesRepository {
   getAllArticles: () => Promise<Article[] | null>
   getArticleBySlug: (slug: string) => Promise<Article | null>
   updateArticle: (
-    payload: Omit<Prisma.ArticleUncheckedCreateInput, 'authorId'> & { categories: string[] }
+    payload: Omit<Prisma.ArticleUncheckedCreateInput, 'authorId'> & {
+      categories: string[]
+    },
+    id: string
   ) => Promise<Article>
 }

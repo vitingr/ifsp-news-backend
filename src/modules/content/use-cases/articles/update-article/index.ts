@@ -9,6 +9,8 @@ export class UpdateArticleUseCase {
     payload: EditArticleUseCasePayload,
     id: string
   ): Promise<EditArticleUseCaseReturn> => {
+    console.log(`ID: ${id}`)
+
     const articleAlreadyExists =
       await this.articlesRepository.getArticleById(id)
 
@@ -16,7 +18,7 @@ export class UpdateArticleUseCase {
       throw new ArticleDoesNotExistError()
     }
 
-    const article = await this.articlesRepository.updateArticle(payload)
+    const article = await this.articlesRepository.updateArticle(payload, id)
 
     return {
       article
