@@ -1,18 +1,21 @@
-import { getAllAuthorsFactory } from "@/modules/account/use-cases/authors/get-all-authors/factory";
-import { BaseController } from "@/shared/infra/http/controllers/base-controller";
-import { FastifyRequest, FastifyReply } from "fastify";
+import { getAllAuthorsFactory } from '@/modules/account/use-cases/authors/get-all-authors/factory'
+import { BaseController } from '@/shared/infra/http/controllers/base-controller'
+import { FastifyRequest, FastifyReply } from 'fastify'
 
 export class GetAllAuthorsController extends BaseController {
   private useCase = getAllAuthorsFactory()
 
   constructor() {
-    super({method: "get", path: "/authors"})
+    super({ method: 'get', path: '/authors', isPublicRoute: true })
   }
 
-  protected async execute(request: FastifyRequest, reply: FastifyReply): Promise<void> {
-      const response = await this.useCase.execute()
+  protected async execute(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ): Promise<void> {
+    const response = await this.useCase.execute()
 
-      return reply.status(200).send(response)
+    return reply.status(200).send(response)
   }
 }
 
