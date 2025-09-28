@@ -5,3 +5,7 @@ export const updateCategorySchema = z.object({
   slug: z.string(),
   description: z.string().optional().nullable()
 })
+
+export const updateCategoryParamsSchema = z.object({
+  id: z.string()
+})

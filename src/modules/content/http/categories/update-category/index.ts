@@ -1,7 +1,7 @@
 import { updateCategoryFactory } from '@/modules/content/use-cases/categories/update-category/factory'
 import { BaseController } from '@/shared/infra/http/controllers/base-controller'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { updateCategorySchema } from './schemas'
+import { updateCategoryParamsSchema, updateCategorySchema } from './schemas'
 
 export class UpdateCategoryController extends BaseController {
   private useCase = updateCategoryFactory()
@@ -9,7 +9,7 @@ export class UpdateCategoryController extends BaseController {
   constructor() {
     super({
       method: 'patch',
-      path: '/categories'
+      path: '/categories/:id'
     })
   }
 
@@ -17,9 +17,11 @@ export class UpdateCategoryController extends BaseController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<void> {
+    const { id } = updateCategoryParamsSchema.parse(request.params)
+
     const payload = updateCategorySchema.parse(request.body)
 
-    const result = await this.useCase.execute(payload)
+    const result = await this.useCase.execute(payload, id)
 
     return reply.status(200).send(result)
   }

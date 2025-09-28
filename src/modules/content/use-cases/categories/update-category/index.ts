@@ -9,10 +9,11 @@ export class UpdateCategoryUseCase {
   constructor(private categoriesRepository: CategoriesRepository) {}
 
   execute = async (
-    payload: UpdateCategoryUseCasePayload
+    payload: UpdateCategoryUseCasePayload,
+    id: string
   ): Promise<UpdateCategoryUseCaseReturn> => {
     const categoryAlreadyExists =
-      await this.categoriesRepository.getCategoryBySlug(payload.slug)
+      await this.categoriesRepository.getCategoryById(id)
 
     if (!categoryAlreadyExists) {
       throw new CategoryDoesNotExistError()

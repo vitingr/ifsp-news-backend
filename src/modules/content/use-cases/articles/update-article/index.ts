@@ -1,16 +1,16 @@
 import { ArticlesRepository } from '@/modules/content/repositories/interfaces/articles-repository'
 import { EditArticleUseCasePayload, EditArticleUseCaseReturn } from './types'
-import { ArticleAlreadyExistsError, ArticleDoesNotExistError } from '@/shared/infra/http/exceptions/articles'
+import { ArticleDoesNotExistError } from '@/shared/infra/http/exceptions/articles'
 
 export class UpdateArticleUseCase {
   constructor(private articlesRepository: ArticlesRepository) {}
 
   execute = async (
-    payload: EditArticleUseCasePayload
+    payload: EditArticleUseCasePayload,
+    id: string
   ): Promise<EditArticleUseCaseReturn> => {
-    const articleAlreadyExists = await this.articlesRepository.getArticleBySlug(
-      payload.slug
-    )
+    const articleAlreadyExists =
+      await this.articlesRepository.getArticleById(id)
 
     if (!articleAlreadyExists) {
       throw new ArticleDoesNotExistError()

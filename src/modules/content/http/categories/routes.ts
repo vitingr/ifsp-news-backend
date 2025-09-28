@@ -3,7 +3,7 @@ import { createCategoryController } from "./create-category";
 import { deleteCategoryController } from "./delete-category";
 import { getAllCategoriesController } from "./get-all-categories";
 import { getCategoryByIdController } from "./get-category-by-id";
-import { updateCategoryController } from "./update-article";
+import { updateCategoryController } from "./update-category";
 
 export const categoriesRoutes = async (app: FastifyInstance) => {
   createCategoryController.register(app)

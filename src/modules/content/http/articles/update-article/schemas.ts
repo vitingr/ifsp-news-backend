@@ -9,3 +9,7 @@ export const updateArticleSchema = z.object({
   isFeatured: z.boolean().default(false),
   categories: z.array(z.string()).default([])
 })
+
+export const updateArticleParamsSchema = z.object({
+  id: z.string()
+})
