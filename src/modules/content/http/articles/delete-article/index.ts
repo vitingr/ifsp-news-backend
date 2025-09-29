@@ -8,7 +8,7 @@ export class DeleteArticleController extends BaseController {
 
   constructor() {
     super({
-      method: 'delete',
+      method: 'post',
       path: '/articles/:id'
     })
   }

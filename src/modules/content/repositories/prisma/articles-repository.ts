@@ -21,7 +21,11 @@ export class PrismaArticlesRepository implements ArticlesRepository {
             : undefined
       },
       include: {
-        articleCategory: { include: { category: true } },
+        articleCategory: {
+          include: {
+            category: true
+          }
+        },
         author: true
       }
     })
