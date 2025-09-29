@@ -9,8 +9,6 @@ export class UpdateArticleUseCase {
     payload: EditArticleUseCasePayload,
     id: string
   ): Promise<EditArticleUseCaseReturn> => {
-    console.log(`ID: ${id}`)
-
     const articleAlreadyExists =
       await this.articlesRepository.getArticleById(id)
 

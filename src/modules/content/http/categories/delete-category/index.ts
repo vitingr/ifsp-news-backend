@@ -18,7 +18,7 @@ export class DeleteCategoryController extends BaseController {
 
     await this.useCase.execute(id)
 
-    reply.status(204).send()
+    reply.status(200).send()
   }
 }
 

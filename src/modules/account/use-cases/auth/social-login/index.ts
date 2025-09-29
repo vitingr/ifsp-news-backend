@@ -58,14 +58,10 @@ export class SocialLoginUseCase {
         name
       })
 
-      console.log(JSON.stringify(user))
-
       user = {
         ...newUser
       }
     }
-
-    console.log(JSON.stringify(user))
 
     if (user) return user
   }

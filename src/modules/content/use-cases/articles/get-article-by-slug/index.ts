@@ -8,8 +8,6 @@ export class GetArticleBySlugUseCase {
   execute = async (slug: string): Promise<Article | null> => {
     const article = await this.articlesRepository.getArticleBySlug(slug)
 
-    console.log(JSON.stringify(article))
-
     if (!article) {
       throw new ArticleDoesNotExistError()
     }
