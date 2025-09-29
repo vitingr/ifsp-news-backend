@@ -8,15 +8,12 @@ export class DeleteCategoryController extends BaseController {
 
   constructor() {
     super({
-      method: 'delete',
+      method: 'post',
       path: '/categories/:id'
     })
   }
 
-  protected async execute(
-    request: FastifyRequest,
-    reply: FastifyReply
-  ): Promise<void> {
+  protected async execute(request: FastifyRequest, reply: FastifyReply) {
     const { id } = deleteCategorySchema.parse(request.params)
 
     await this.useCase.execute(id)

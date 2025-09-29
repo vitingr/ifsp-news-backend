@@ -19,7 +19,7 @@ export class UpdateCategoryUseCase {
       throw new CategoryDoesNotExistError()
     }
 
-    const category = await this.categoriesRepository.updateCategory(payload)
+    const category = await this.categoriesRepository.updateCategory(payload, id)
 
     return {
       category
